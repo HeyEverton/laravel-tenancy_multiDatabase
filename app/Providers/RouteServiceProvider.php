@@ -18,7 +18,6 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
-
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *
@@ -27,17 +26,32 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configureRateLimiting();
-
         $this->routes(function () {
-            Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
-
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+            $this->mapApiRoutes();
+            $this->mapWebRoutes();
         });
     }
-
+    public function mapApiRoutes()
+    {
+        foreach ($this->centralDomains() as $domain) {
+            Route::middleware('api')
+                ->domain($domain)
+                ->prefix('api')
+                ->group(base_path('routes/api.php'));
+        }
+    }
+    public function mapWebRoutes()
+    {
+        foreach ($this->centralDomains() as $domain) {
+            Route::middleware('web')
+                ->domain($domain)
+                ->group(base_path('routes/web.php'));
+        }
+    }
+    protected function centralDomains()
+    {
+        return config('tenancy.central_domains');
+    }
     /**
      * Configure the rate limiters for the application.
      *
