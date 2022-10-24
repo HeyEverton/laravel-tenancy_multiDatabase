@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::controller(App\Http\Controllers\RegisterTenantController::class)
+    ->name('tenant.')
+    ->group(function () {
+        Route::get('cadastro', 'register')->name('form');
+        Route::post('cadastro', 'store')->name('register');
+    });
+
