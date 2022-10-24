@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
+            //POR CASO DE QUERER MAIS DE UM RESTAURANTE POR BASE INQUILINO
             $table->foreignId('restaurant_id')->constrained()->cascadeOnDelete();
 
             $table->string('item');
