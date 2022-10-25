@@ -22,7 +22,7 @@
                                 @if (!$item->photo)
                                     Sem Foto
                                 @else
-                                    <img src="{{ asset('storage/' . $item->photo) }}"
+                                    <img src="{{route('server.image', str_replace('/', '|', $item->photo))}}"
                                         alt="Thumb do vídeo {{ $item->item }}" class="max-w-full">
                                 @endif
                             </div>

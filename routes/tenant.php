@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Livewire\Tenants\RestaurantsMenu\Index;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -35,6 +36,16 @@ Route::middleware([
     Route::prefix('restaurants/menu')->name('restaurants.menu.')->group(function () {
         Route::get('/', Index::class)->name('index');
     });
+
+    Route::get('/photo/{path}', function($path){
+        $image = str_replace('|', '/', $path);
+        $path = storage_path('app/public/' . $image);
+
+        $mimeType = File::mimeType($path);
+
+        return response(file_get_contents($path))->header('Content-Type', $mimeType);
+
+    })->name('server.image');
 
     require __DIR__ . '/auth.php';
 });
