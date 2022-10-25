@@ -37,8 +37,9 @@ Route::middleware([
         Route::get('/', Index::class)->name('index');
     });
 
-    Route::get('/photo/{path}', function($path){
+    Route::get('/photo/{path}', function($path) {
         $image = str_replace('|', '/', $path);
+
         $path = storage_path('app/public/' . $image);
 
         $mimeType = File::mimeType($path);

@@ -64,7 +64,10 @@ class Item extends Component
     public function modalClosed()
     {
         $this->resetValidation();
-        $this->reset('menu', 'photo');
+        
+        $this->menu = new Menu();
+        
+        $this->reset('photo');
     }
 
     public function render()

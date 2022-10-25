@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Jobs\CreateRootUserTenant;
+use App\Jobs\{CreateFrameworkDirectoriesForTenant, CreateRootUserTenant};
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -28,8 +28,9 @@ class TenancyServiceProvider extends ServiceProvider
                 JobPipeline::make([
                     Jobs\CreateDatabase::class,
                     Jobs\MigrateDatabase::class,
-                    CreateRootUserTenant::class,
                     // Jobs\SeedDatabase::class,
+                    CreateFrameworkDirectoriesForTenant::class,
+                    CreateRootUserTenant::class,
 
                     // Your own jobs to prepare the tenant.
                     // Provision API keys, create S3 buckets, anything you want!

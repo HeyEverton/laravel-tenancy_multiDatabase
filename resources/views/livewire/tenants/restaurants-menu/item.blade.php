@@ -30,7 +30,7 @@
         <div class="w-full mb-8">
             <label>Preço</label>
             <input type="text" class="w-full rounded mt-2 @error('menu.price') border-red-700 @enderror"
-                wire:model="menu.price">
+                wire:model.defer="menu.price">
 
             @error('menu.price')
                 <strong class="block mt-4 text-red-700 font-bold">{{ $message }}</strong>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="w-full mb-8">
-            <div class="w-1/2">
+            <div class="w-full">
                 <label>Foto Item</label>
                 <input type="file" class="w-full rounded mt-2 @error('photo') border-red-700 @enderror"
                     wire:model="photo">
@@ -48,7 +48,7 @@
                 @enderror
             </div>
 
-            <div class="w-1/2">
+            <div class="w-full mt-4">
                 @if ($photo)
                 <img src="{{$photo?->temporaryUrl()}}" alt="Prévia Imagem Item">
                 @elseif ($menu?->photo)
