@@ -36,5 +36,8 @@ class CreateRootUserTenant implements ShouldQueue
         $this->tenant->run(function($tenant) {
             User::create($tenant->only('name', 'password', 'email', 'role'));
         });
+
+        $this->tenant->password = '';
+        $this->tenant->save();
     }
 }
