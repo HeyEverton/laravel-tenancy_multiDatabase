@@ -4,9 +4,11 @@ namespace App\Http\Livewire\Tenants\RestaurantsMenu;
 
 use App\Models\Tenant\Menu;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
     protected $listeners = ['menuItemUpdated' => '$refresh', 'menuItemDeleted' => '$refresh'];
     const TOTAL_PER_PAGE = 10;
 

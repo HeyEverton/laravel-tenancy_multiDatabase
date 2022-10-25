@@ -13,7 +13,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
+    <body @if(request()->routeIs('tenant.home')) class="bg-red-100" @endif>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
